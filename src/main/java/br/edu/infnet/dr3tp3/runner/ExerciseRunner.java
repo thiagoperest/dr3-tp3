@@ -21,6 +21,9 @@ public class ExerciseRunner implements CommandLineRunner {
 
         System.out.println("\nExercício 2: GET de entidade específica");
         exercicio2();
+
+        System.out.println("\nExercício 3: GET de entidade inexistente");
+        exercicio3();
     }
 
     private void exercicio1() {
@@ -46,6 +49,17 @@ public class ExerciseRunner implements CommandLineRunner {
             System.out.println("\nExercício 2 concluído!");
         } catch (Exception e) {
             System.err.println("Erro no exercício 2: " + e.getMessage());
+        }
+    }
+
+    private void exercicio3() {
+        try {
+            System.out.println("Processando exercício 3...");
+            String url = entitiesApiUrl + "/13";
+            httpClientService.sendGetRequest(url);
+            System.out.println("\nExercício 3 concluído!");
+        } catch (Exception e) {
+            System.err.println("Erro no exercício 3: " + e.getMessage());
         }
     }
 }
