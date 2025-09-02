@@ -18,6 +18,9 @@ public class ExerciseRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println("Exercício 1: GET simples de todas as entidades");
         exercicio1();
+
+        System.out.println("\nExercício 2: GET de entidade específica");
+        exercicio2();
     }
 
     private void exercicio1() {
@@ -27,6 +30,22 @@ public class ExerciseRunner implements CommandLineRunner {
             System.out.println("Exercício 1 concluído!");
         } catch (Exception e) {
             System.err.println("Erro no exercício 1: " + e.getMessage());
+        }
+    }
+
+    private void exercicio2() {
+        try {
+            System.out.println("Processando exercício 2...");
+
+            for (int id = 1; id <= 8; id++) {
+                System.out.println("\n--- Entidade ID: " + id + " ---");
+                String url = entitiesApiUrl + "/" + id;
+                httpClientService.sendGetRequest(url);
+            }
+
+            System.out.println("\nExercício 2 concluído!");
+        } catch (Exception e) {
+            System.err.println("Erro no exercício 2: " + e.getMessage());
         }
     }
 }
