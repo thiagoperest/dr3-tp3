@@ -33,6 +33,9 @@ public class ExerciseRunner implements CommandLineRunner {
 
         System.out.println("\nExercício 6: GET da entidade criada");
         exercicio6();
+
+        System.out.println("\nExercício 7: POST para atualizar uma entidade");
+        exercicio7();
     }
 
     private void exercicio1() {
@@ -105,6 +108,25 @@ public class ExerciseRunner implements CommandLineRunner {
             System.out.println("Exercício 6 concluído!");
         } catch (Exception e) {
             System.err.println("Erro no exercício 6: " + e.getMessage());
+        }
+    }
+
+    private void exercicio7() {
+        try {
+            System.out.println("Processando exercício 7...");
+            String postUrl = entitiesApiUrl + "/10";
+            String jsonData = "{\"name\": \"atualizado\"}";
+            System.out.println("Body Request: " + jsonData);
+            System.out.println("URL: " + postUrl);
+            httpClientService.sendPostRequest(postUrl, jsonData);
+
+            System.out.println("\nRealizando GET...");
+            String getUrl = entitiesApiUrl + "/10";
+            httpClientService.sendGetRequest(getUrl);
+
+            System.out.println("Exercício 7 concluído!");
+        } catch (Exception e) {
+            System.err.println("Erro no exercício 7: " + e.getMessage());
         }
     }
 }
