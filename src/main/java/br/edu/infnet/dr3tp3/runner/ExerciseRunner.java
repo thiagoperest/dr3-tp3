@@ -42,6 +42,9 @@ public class ExerciseRunner implements CommandLineRunner {
 
         System.out.println("\nExercício 9: DELETE de entidade válida");
         exercicio9();
+
+        System.out.println("\nExercício 10: DELETE inválido");
+        exercicio10();
     }
 
     private void exercicio1() {
@@ -169,6 +172,19 @@ public class ExerciseRunner implements CommandLineRunner {
             System.out.println("Exercício 9 concluído!");
         } catch (Exception e) {
             System.err.println("Erro no exercício 9: " + e.getMessage());
+        }
+    }
+
+    private void exercicio10() {
+        try {
+            System.out.println("Processando exercício 10...");
+            String deleteUrl = entitiesApiUrl + "/2";
+            System.out.println("URL: " + deleteUrl);
+            httpClientService.sendDeleteRequest(deleteUrl);
+
+            System.out.println("Exercício 10 concluído!");
+        } catch (Exception e) {
+            System.err.println("Erro no exercício 10: " + e.getMessage());
         }
     }
 }
