@@ -39,6 +39,9 @@ public class ExerciseRunner implements CommandLineRunner {
 
         System.out.println("\nExercício 8: PUT para atualizar entidade");
         exercicio8();
+
+        System.out.println("\nExercício 9: DELETE de entidade válida");
+        exercicio9();
     }
 
     private void exercicio1() {
@@ -149,6 +152,23 @@ public class ExerciseRunner implements CommandLineRunner {
             System.out.println("Exercício 8 concluído!");
         } catch (Exception e) {
             System.err.println("Erro no exercício 8: " + e.getMessage());
+        }
+    }
+
+    private void exercicio9() {
+        try {
+            System.out.println("Processando exercício 9...");
+            String deleteUrl = entitiesApiUrl + "/9";
+            System.out.println("URL: " + deleteUrl);
+            httpClientService.sendDeleteRequest(deleteUrl);
+
+            System.out.println("\nRealizando GET...");
+            String getUrl = entitiesApiUrl + "/9";
+            httpClientService.sendGetRequest(getUrl);
+
+            System.out.println("Exercício 9 concluído!");
+        } catch (Exception e) {
+            System.err.println("Erro no exercício 9: " + e.getMessage());
         }
     }
 }
