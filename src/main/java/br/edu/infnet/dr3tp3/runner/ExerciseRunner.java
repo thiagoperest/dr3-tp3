@@ -14,6 +14,9 @@ public class ExerciseRunner implements CommandLineRunner {
     @Value("${external.api.entities.url}")
     private String entitiesApiUrl;
 
+    @Value("${external.api.simpleapi.url}")
+    private String simpleApiUrl;
+
     @Override
     public void run(String... args) throws Exception {
         System.out.println("Exercício 1: GET simples de todas as entidades");
@@ -48,6 +51,9 @@ public class ExerciseRunner implements CommandLineRunner {
 
         System.out.println("\nExercício 11: OPTIONS com verificação de métodos");
         exercicio11();
+
+        System.out.println("\nExercício 12: Experimentos com a Simple API");
+        exercicio12();
     }
 
     private void exercicio1() {
@@ -200,6 +206,41 @@ public class ExerciseRunner implements CommandLineRunner {
             System.out.println("Exercício 11 concluído!");
         } catch (Exception e) {
             System.err.println("Erro no exercício 11: " + e.getMessage());
+        }
+    }
+
+    private void exercicio12() {
+        try {
+            System.out.println("Processando exercício 12...");
+            System.out.println("GET todos os itens");
+            httpClientService.sendGetRequest(simpleApiUrl);
+
+            System.out.println("\nGerar ISBN aleatório");
+            String randomIsbnUrl = simpleApiUrl.replace("/items", "/randomisbn");
+            String isbnResponse = httpClientService.sendGetRequest(randomIsbnUrl);
+            String isbn = isbnResponse.trim().replaceAll("\"", "");
+            System.out.println("ISBN: " + isbn);
+
+            System.out.println("\nCriar item com POST");
+            String jsonData = "{\"type\": \"book\", \"isbn13\": \"" + isbn + "\", \"price\": 5.99, \"numberinstock\": 5}";
+            System.out.println("Body Request: " + jsonData);
+            httpClientService.sendPostRequest(simpleApiUrl, jsonData);
+
+            System.out.println("\nAtualizar item com PUT");
+            String updateJsonData = "{\"type\": \"book\", \"isbn13\": \"" + isbn + "\", \"price\": 9.99, \"numberinstock\": 10}";
+            String putUrl = simpleApiUrl + "/" + isbn;
+            System.out.println("Body Request: " + updateJsonData);
+            System.out.println("URL: " + putUrl);
+            httpClientService.sendPutRequest(putUrl, updateJsonData);
+
+            System.out.println("\nRemover item com DELETE");
+            String deleteUrl = simpleApiUrl + "/" + isbn;
+            System.out.println("URL: " + deleteUrl);
+            httpClientService.sendDeleteRequest(deleteUrl);
+
+            System.out.println("Exercício 12 concluído!");
+        } catch (Exception e) {
+            System.err.println("Erro no exercício 12: " + e.getMessage());
         }
     }
 }
