@@ -45,6 +45,9 @@ public class ExerciseRunner implements CommandLineRunner {
 
         System.out.println("\nExercício 10: DELETE inválido");
         exercicio10();
+
+        System.out.println("\nExercício 11: OPTIONS com verificação de métodos");
+        exercicio11();
     }
 
     private void exercicio1() {
@@ -185,6 +188,18 @@ public class ExerciseRunner implements CommandLineRunner {
             System.out.println("Exercício 10 concluído!");
         } catch (Exception e) {
             System.err.println("Erro no exercício 10: " + e.getMessage());
+        }
+    }
+
+    private void exercicio11() {
+        try {
+            System.out.println("Processando exercício 11...");
+            System.out.println("URL: " + entitiesApiUrl);
+            httpClientService.sendOptionsRequest(entitiesApiUrl);
+
+            System.out.println("Exercício 11 concluído!");
+        } catch (Exception e) {
+            System.err.println("Erro no exercício 11: " + e.getMessage());
         }
     }
 }
